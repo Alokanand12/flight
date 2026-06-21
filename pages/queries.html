@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Queries | My-Air</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animation.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+<body>
+
+  <div class="cursor-glow"></div>
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">✈️</span>
+        <span>MY--AIR</span>
+      </a>
+
+      <div class="nav-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Modules <span class="arrow">▼</span></a>
+          <div class="nav-dropdown">
+            <a href="passenger.html" class="dropdown-link"><span class="dd-icon">👤</span> Passenger</a>
+            <a href="agency.html" class="dropdown-link"><span class="dd-icon">🏢</span> Agency</a>
+            <a href="flight.html" class="dropdown-link"><span class="dd-icon">✈️</span> Flight</a>
+            <a href="booking.html" class="dropdown-link"><span class="dd-icon">🎟️</span> Booking</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="queries.html" class="nav-link" style="color: var(--light)">SQL Queries</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <li class="nav-item" style="margin-left: 10px;">
+          <div class="theme-toggle-wrapper">
+            <div class="theme-toggle"><div class="theme-toggle-knob">☀️</div></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header" style="background: linear-gradient(135deg, #312E81 0%, #1E1B4B 100%);">
+    <div class="container fade-in-up">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a> / <span style="color: white">SQL Queries</span>
+      </div>
+      <h1>SQL Case Study Queries</h1>
+      <p>30 comprehensive SQL queries demonstrating table creation, constraints, joins, and aggregations.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section">
+    <div class="container">
+      
+      <!-- Filter Tabs -->
+      <div class="filter-tabs reveal">
+        <button class="filter-tab active" data-filter="all">All Queries</button>
+        <button class="filter-tab" data-filter="DDL">DDL (Create/Alter)</button>
+        <button class="filter-tab" data-filter="DML">DML (Insert/Update/Delete)</button>
+        <button class="filter-tab" data-filter="DQL">DQL (Select/Joins/Agg)</button>
+      </div>
+
+      <div class="grid" style="gap: var(--space-xl)" id="queries-container">
+        <!-- Queries will be injected here via JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none">
+        <div>&copy; 2026 My-Air Case Study.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/animation.js"></script>
+  <script src="../js/app.js"></script>
+  
+  <script>
+    // The 30 Queries Data
+    const queries = [
+      // DDL: Create Tables (1-4)
+      { id: 1, type: 'DDL', title: 'Create Passenger Table', code: `<span class="sql-keyword">CREATE TABLE</span> Passenger (\n  PID <span class="sql-keyword">VARCHAR</span>(10) <span class="sql-keyword">PRIMARY KEY</span>,\n  PName <span class="sql-keyword">VARCHAR</span>(50) <span class="sql-keyword">NOT NULL</span>,\n  Gender <span class="sql-keyword">VARCHAR</span>(10),\n  City <span class="sql-keyword">VARCHAR</span>(50)\n);` },
+      { id: 2, type: 'DDL', title: 'Create Agency Table', code: `<span class="sql-keyword">CREATE TABLE</span> Agency (\n  AID <span class="sql-keyword">VARCHAR</span>(10) <span class="sql-keyword">PRIMARY KEY</span>,\n  AName <span class="sql-keyword">VARCHAR</span>(50) <span class="sql-keyword">NOT NULL</span>,\n  City <span class="sql-keyword">VARCHAR</span>(50)\n);` },
+      { id: 3, type: 'DDL', title: 'Create Flight Table', code: `<span class="sql-keyword">CREATE TABLE</span> Flight (\n  FID <span class="sql-keyword">VARCHAR</span>(10) <span class="sql-keyword">PRIMARY KEY</span>,\n  FDate <span class="sql-keyword">DATE</span>,\n  Time <span class="sql-keyword">TIME</span>,\n  Source <span class="sql-keyword">VARCHAR</span>(50),\n  Destination <span class="sql-keyword">VARCHAR</span>(50)\n);` },
+      { id: 4, type: 'DDL', title: 'Create Booking Table', code: `<span class="sql-keyword">CREATE TABLE</span> Booking (\n  PID <span class="sql-keyword">VARCHAR</span>(10),\n  AID <span class="sql-keyword">VARCHAR</span>(10),\n  FID <span class="sql-keyword">VARCHAR</span>(10),\n  FDate <span class="sql-keyword">DATE</span>,\n  <span class="sql-keyword">PRIMARY KEY</span> (PID, AID, FID, FDate),\n  <span class="sql-keyword">FOREIGN KEY</span> (PID) <span class="sql-keyword">REFERENCES</span> Passenger(PID),\n  <span class="sql-keyword">FOREIGN KEY</span> (AID) <span class="sql-keyword">REFERENCES</span> Agency(AID),\n  <span class="sql-keyword">FOREIGN KEY</span> (FID) <span class="sql-keyword">REFERENCES</span> Flight(FID)\n);` },
+
+      // DDL: Alter Tables (5-8)
+      { id: 5, type: 'DDL', title: 'Alter Passenger (Add Email)', code: `<span class="sql-keyword">ALTER TABLE</span> Passenger <span class="sql-keyword">ADD</span> Email <span class="sql-keyword">VARCHAR</span>(100);` },
+      { id: 6, type: 'DDL', title: 'Alter Agency (Modify Column)', code: `<span class="sql-keyword">ALTER TABLE</span> Agency <span class="sql-keyword">MODIFY</span> AName <span class="sql-keyword">VARCHAR</span>(100);` },
+      { id: 7, type: 'DDL', title: 'Alter Flight (Drop Column)', code: `<span class="sql-keyword">ALTER TABLE</span> Flight <span class="sql-keyword">DROP COLUMN</span> Time;` },
+      { id: 8, type: 'DDL', title: 'Alter Booking (Add Constraint)', code: `<span class="sql-keyword">ALTER TABLE</span> Booking <span class="sql-keyword">ADD CONSTRAINT</span> chk_date <span class="sql-keyword">CHECK</span> (FDate >= <span class="sql-string">'2026-01-01'</span>);` },
+
+      // DML: Insert Data (9-12)
+      { id: 9, type: 'DML', title: 'Insert into Passenger', code: `<span class="sql-keyword">INSERT INTO</span> Passenger (PID, PName, Gender, City) \n<span class="sql-keyword">VALUES</span> (<span class="sql-string">'P001'</span>, <span class="sql-string">'John Doe'</span>, <span class="sql-string">'Male'</span>, <span class="sql-string">'New York'</span>);` },
+      { id: 10, type: 'DML', title: 'Insert into Agency', code: `<span class="sql-keyword">INSERT INTO</span> Agency (AID, AName, City) \n<span class="sql-keyword">VALUES</span> (<span class="sql-string">'A001'</span>, <span class="sql-string">'SkyHigh Travels'</span>, <span class="sql-string">'London'</span>);` },
+      { id: 11, type: 'DML', title: 'Insert into Flight', code: `<span class="sql-keyword">INSERT INTO</span> Flight (FID, FDate, Source, Destination) \n<span class="sql-keyword">VALUES</span> (<span class="sql-string">'FL101'</span>, <span class="sql-string">'2026-07-15'</span>, <span class="sql-string">'New York'</span>, <span class="sql-string">'London'</span>);` },
+      { id: 12, type: 'DML', title: 'Insert into Booking', code: `<span class="sql-keyword">INSERT INTO</span> Booking (PID, AID, FID, FDate) \n<span class="sql-keyword">VALUES</span> (<span class="sql-string">'P001'</span>, <span class="sql-string">'A001'</span>, <span class="sql-string">'FL101'</span>, <span class="sql-string">'2026-07-15'</span>);` },
+
+      // DML: Update Data (13-16)
+      { id: 13, type: 'DML', title: 'Update Passenger City', code: `<span class="sql-keyword">UPDATE</span> Passenger \n<span class="sql-keyword">SET</span> City = <span class="sql-string">'Los Angeles'</span> \n<span class="sql-keyword">WHERE</span> PID = <span class="sql-string">'P001'</span>;` },
+      { id: 14, type: 'DML', title: 'Update Agency Name', code: `<span class="sql-keyword">UPDATE</span> Agency \n<span class="sql-keyword">SET</span> AName = <span class="sql-string">'Global Flights'</span> \n<span class="sql-keyword">WHERE</span> AID = <span class="sql-string">'A001'</span>;` },
+      { id: 15, type: 'DML', title: 'Update Flight Route', code: `<span class="sql-keyword">UPDATE</span> Flight \n<span class="sql-keyword">SET</span> Destination = <span class="sql-string">'Dubai'</span> \n<span class="sql-keyword">WHERE</span> FID = <span class="sql-string">'FL101'</span>;` },
+      { id: 16, type: 'DML', title: 'Update Booking Date', code: `<span class="sql-keyword">UPDATE</span> Booking \n<span class="sql-keyword">SET</span> FDate = <span class="sql-string">'2026-08-01'</span> \n<span class="sql-keyword">WHERE</span> PID = <span class="sql-string">'P001'</span>;` },
+
+      // DML: Delete Data (17-20)
+      { id: 17, type: 'DML', title: 'Delete from Booking', code: `<span class="sql-keyword">DELETE FROM</span> Booking \n<span class="sql-keyword">WHERE</span> PID = <span class="sql-string">'P001'</span>;` },
+      { id: 18, type: 'DML', title: 'Delete from Passenger', code: `<span class="sql-keyword">DELETE FROM</span> Passenger \n<span class="sql-keyword">WHERE</span> City = <span class="sql-string">'Unknown'</span>;` },
+      { id: 19, type: 'DML', title: 'Delete from Agency', code: `<span class="sql-keyword">DELETE FROM</span> Agency \n<span class="sql-keyword">WHERE</span> City = <span class="sql-string">'Nowhere'</span>;` },
+      { id: 20, type: 'DML', title: 'Delete from Flight', code: `<span class="sql-keyword">DELETE FROM</span> Flight \n<span class="sql-keyword">WHERE</span> FDate < <span class="sql-string">'2025-01-01'</span>;` },
+
+      // DQL: Select, Joins, Aggregation (21-30)
+      { id: 21, type: 'DQL', title: 'Select All Passengers', code: `<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> Passenger;` },
+      { id: 22, type: 'DQL', title: 'Flights to London', code: `<span class="sql-keyword">SELECT</span> FID, Source \n<span class="sql-keyword">FROM</span> Flight \n<span class="sql-keyword">WHERE</span> Destination = <span class="sql-string">'London'</span>;` },
+      { id: 23, type: 'DQL', title: 'Count Passengers by City', code: `<span class="sql-keyword">SELECT</span> City, <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">AS</span> Total_Passengers \n<span class="sql-keyword">FROM</span> Passenger \n<span class="sql-keyword">GROUP BY</span> City;` },
+      { id: 24, type: 'DQL', title: 'Join: Passenger Bookings', code: `<span class="sql-keyword">SELECT</span> p.PName, b.FID, b.FDate \n<span class="sql-keyword">FROM</span> Passenger p \n<span class="sql-keyword">JOIN</span> Booking b <span class="sql-keyword">ON</span> p.PID = b.PID;` },
+      { id: 25, type: 'DQL', title: 'Join: Agency Bookings Count', code: `<span class="sql-keyword">SELECT</span> a.AName, <span class="sql-function">COUNT</span>(b.PID) <span class="sql-keyword">AS</span> Total_Bookings \n<span class="sql-keyword">FROM</span> Agency a \n<span class="sql-keyword">LEFT JOIN</span> Booking b <span class="sql-keyword">ON</span> a.AID = b.AID \n<span class="sql-keyword">GROUP BY</span> a.AName;` },
+      { id: 26, type: 'DQL', title: 'Flights booked by specific passenger', code: `<span class="sql-keyword">SELECT</span> f.Source, f.Destination \n<span class="sql-keyword">FROM</span> Flight f \n<span class="sql-keyword">JOIN</span> Booking b <span class="sql-keyword">ON</span> f.FID = b.FID \n<span class="sql-keyword">WHERE</span> b.PID = <span class="sql-string">'P001'</span>;` },
+      { id: 27, type: 'DQL', title: 'Passenger not booked any flight', code: `<span class="sql-keyword">SELECT</span> PName \n<span class="sql-keyword">FROM</span> Passenger \n<span class="sql-keyword">WHERE</span> PID <span class="sql-keyword">NOT IN</span> (<span class="sql-keyword">SELECT</span> PID <span class="sql-keyword">FROM</span> Booking);` },
+      { id: 28, type: 'DQL', title: 'Most Popular Destination', code: `<span class="sql-keyword">SELECT</span> Destination, <span class="sql-function">COUNT</span>(b.PID) <span class="sql-keyword">AS</span> Bookings \n<span class="sql-keyword">FROM</span> Flight f \n<span class="sql-keyword">JOIN</span> Booking b <span class="sql-keyword">ON</span> f.FID = b.FID \n<span class="sql-keyword">GROUP BY</span> Destination \n<span class="sql-keyword">ORDER BY</span> Bookings <span class="sql-keyword">DESC</span> \n<span class="sql-keyword">LIMIT</span> 1;` },
+      { id: 29, type: 'DQL', title: 'Agencies in same city as Passenger', code: `<span class="sql-keyword">SELECT</span> <span class="sql-keyword">DISTINCT</span> a.AName \n<span class="sql-keyword">FROM</span> Agency a \n<span class="sql-keyword">JOIN</span> Passenger p <span class="sql-keyword">ON</span> a.City = p.City;` },
+      { id: 30, type: 'DQL', title: 'Complex: Full Booking Details', code: `<span class="sql-keyword">SELECT</span> p.PName, a.AName, f.Source, f.Destination, b.FDate \n<span class="sql-keyword">FROM</span> Booking b \n<span class="sql-keyword">JOIN</span> Passenger p <span class="sql-keyword">ON</span> b.PID = p.PID \n<span class="sql-keyword">JOIN</span> Agency a <span class="sql-keyword">ON</span> b.AID = a.AID \n<span class="sql-keyword">JOIN</span> Flight f <span class="sql-keyword">ON</span> b.FID = f.FID;` }
+    ];
+
+    const container = document.getElementById('queries-container');
+
+    function renderQueries(filter = 'all') {
+      container.innerHTML = '';
+      
+      const filtered = filter === 'all' ? queries : queries.filter(q => q.type === filter);
+
+      filtered.forEach((q, idx) => {
+        const delay = (idx % 4) + 1; // staggering 1-4
+        const card = document.createElement('div');
+        card.className = `query-card reveal reveal-delay-${delay}`;
+        card.innerHTML = `
+          <div class="query-card-header">
+            <div class="query-number">${q.id}</div>
+            <div class="query-title">${q.title}</div>
+            <div class="query-category">${q.type}</div>
+          </div>
+          <div class="query-code">
+            <pre>${q.code}</pre>
+          </div>
+          <div class="query-actions">
+            <button class="btn btn-outline btn-sm copy-btn" onclick="copyCode(this, \`${q.code.replace(/<[^>]*>?/gm, '')}\`)">Copy Code</button>
+            <button class="btn btn-primary btn-sm run-btn ripple" onclick="runQuery(this)">
+              Run Query
+              <div class="run-progress"></div>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Trigger scroll reveal for new elements
+      setTimeout(() => {
+        document.querySelectorAll('.query-card').forEach(el => {
+          el.classList.add('active');
+        });
+      }, 50);
+    }
+
+    // Copy to clipboard
+    function copyCode(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        App.showToast('Query copied to clipboard', 'success');
+        setTimeout(() => {
+          btn.textContent = 'Copy Code';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // Simulate query execution
+    function runQuery(btn) {
+      if (btn.classList.contains('running')) return;
+      btn.classList.add('running');
+      btn.textContent = 'Executing...';
+      
+      setTimeout(() => {
+        btn.classList.remove('running');
+        btn.innerHTML = 'Run Query <div class="run-progress"></div>';
+        App.showToast('Query executed successfully (Simulation)', 'success');
+      }, 1000);
+    }
+
+    // Filter Logic
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        // Update active class
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        
+        // Render
+        renderQueries(e.target.getAttribute('data-filter'));
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderQueries('all');
+    });
+  </script>
+</body>
+</html>

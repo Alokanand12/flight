@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agency Module | My-Air</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animation.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+<body>
+
+  <div class="cursor-glow"></div>
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">✈️</span>
+        <span>MY--AIR</span>
+      </a>
+
+      <div class="nav-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Modules <span class="arrow">▼</span></a>
+          <div class="nav-dropdown">
+            <a href="passenger.html" class="dropdown-link"><span class="dd-icon">👤</span> Passenger</a>
+            <a href="agency.html" class="dropdown-link" style="color: var(--accent-light)"><span class="dd-icon">🏢</span> Agency</a>
+            <a href="flight.html" class="dropdown-link"><span class="dd-icon">✈️</span> Flight</a>
+            <a href="booking.html" class="dropdown-link"><span class="dd-icon">🎟️</span> Booking</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="queries.html" class="nav-link">SQL Queries</a></li>
+        
+        <li class="nav-item" style="margin-left: 10px;">
+          <div class="theme-toggle-wrapper">
+            <div class="theme-toggle"><div class="theme-toggle-knob">☀️</div></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header" style="background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);">
+    <div class="container fade-in-up">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a> / <span>Modules</span> / <span style="color: white">Agency</span>
+      </div>
+      <h1>Agency Directory</h1>
+      <p>Manage travel agencies and their branch locations across the globe.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section">
+    <div class="container">
+      
+      <!-- Actions Row -->
+      <div class="flex justify-between items-center mb-3 reveal" style="flex-wrap: wrap; gap: 1rem;">
+        <div class="table-search">
+          <span style="color: var(--text-tertiary)">🔍</span>
+          <input type="text" id="search-input" placeholder="Search agencies...">
+        </div>
+        <button class="btn btn-primary ripple hover-lift" onclick="openModal('add-modal')">
+          + Add New Agency
+        </button>
+      </div>
+
+      <!-- Data Table -->
+      <div class="table-container reveal reveal-delay-1">
+        <div class="table-header">
+          <h3 class="card-title" style="margin: 0">Registered Agencies</h3>
+          <div class="tag tag-success">Total: <span id="total-count">0</span></div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Agency ID <span class="sort-icon">▼</span></th>
+                <th>Agency Name <span class="sort-icon">▼</span></th>
+                <th>City</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Rows populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay" id="add-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Add Agency</h3>
+        <button class="modal-close" onclick="closeModal('add-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="agency-form" onsubmit="handleFormSubmit(event)">
+          <input type="hidden" id="form-mode" value="add">
+          
+          <div class="form-group">
+            <label class="form-label">Agency ID</label>
+            <input type="text" id="a-id" class="form-input" required placeholder="e.g., A005">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Agency Name</label>
+            <input type="text" id="a-name" class="form-input" required placeholder="e.g., Zenith Travels">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" id="a-city" class="form-input" required placeholder="City name">
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary flex-1" onclick="closeModal('add-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary flex-1 ripple">Save Agency</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/database.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/animation.js"></script>
+  <script src="../js/app.js"></script>
+  
+  <script>
+    function renderTable(searchTerm = '') {
+      const data = DB.getTable('agencies');
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+      
+      let filtered = data;
+      if (searchTerm) {
+        const lower = searchTerm.toLowerCase();
+        filtered = data.filter(r => 
+          r.name.toLowerCase().includes(lower) || 
+          r.id.toLowerCase().includes(lower) ||
+          r.city.toLowerCase().includes(lower)
+        );
+      }
+
+      document.getElementById('total-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="text-center" style="padding: 3rem">
+          <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5">🏢</div>
+          No agencies found.
+        </td></tr>`;
+        return;
+      }
+
+      filtered.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'fade-in-up';
+        tr.innerHTML = `
+          <td><strong style="color: var(--primary)">${row.id}</strong></td>
+          <td>${row.name}</td>
+          <td><span class="tag tag-primary">📍 ${row.city}</span></td>
+          <td>
+            <div class="table-actions">
+              <button class="btn-icon action-edit" onclick="editRecord('${row.id}')" title="Edit">✎</button>
+              <button class="btn-icon action-delete" onclick="deleteRecord('${row.id}')" title="Delete">🗑</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      renderTable(e.target.value);
+    });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.getElementById('agency-form').reset();
+      document.getElementById('form-mode').value = 'add';
+      document.getElementById('a-id').readOnly = false;
+      document.getElementById('modal-title').textContent = 'Add Agency';
+    }
+
+    function editRecord(id) {
+      const data = DB.getTable('agencies').find(r => r.id === id);
+      if (data) {
+        document.getElementById('a-id').value = data.id;
+        document.getElementById('a-id').readOnly = true;
+        document.getElementById('a-name').value = data.name;
+        document.getElementById('a-city').value = data.city;
+        
+        document.getElementById('form-mode').value = 'edit';
+        document.getElementById('modal-title').textContent = 'Edit Agency';
+        openModal('add-modal');
+      }
+    }
+
+    function deleteRecord(id) {
+      if (confirm(`Are you sure you want to delete agency ${id}?`)) {
+        DB.deleteRecord('agencies', 'id', id);
+        App.showToast('Agency deleted successfully', 'success');
+        renderTable();
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      if (!App.validateForm('agency-form')) return;
+
+      const record = {
+        id: document.getElementById('a-id').value,
+        name: document.getElementById('a-name').value,
+        city: document.getElementById('a-city').value
+      };
+
+      const mode = document.getElementById('form-mode').value;
+      
+      if (mode === 'add') {
+        const exists = DB.getTable('agencies').find(r => r.id === record.id);
+        if (exists) {
+          App.showToast('Agency ID already exists!', 'error');
+          return;
+        }
+        DB.addRecord('agencies', record);
+        App.showToast('Agency added successfully', 'success');
+      } else {
+        DB.updateRecord('agencies', 'id', record.id, record);
+        App.showToast('Agency updated successfully', 'success');
+      }
+
+      closeModal('add-modal');
+      renderTable();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => renderTable());
+  </script>
+</body>
+</html>

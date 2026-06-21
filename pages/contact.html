@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | My-Air</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animation.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+<body>
+
+  <div class="cursor-glow"></div>
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">✈️</span>
+        <span>My-Air</span>
+      </a>
+
+      <div class="nav-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Modules <span class="arrow">▼</span></a>
+          <div class="nav-dropdown">
+            <a href="passenger.html" class="dropdown-link"><span class="dd-icon">👤</span> Passenger</a>
+            <a href="agency.html" class="dropdown-link"><span class="dd-icon">🏢</span> Agency</a>
+            <a href="flight.html" class="dropdown-link"><span class="dd-icon">✈️</span> Flight</a>
+            <a href="booking.html" class="dropdown-link"><span class="dd-icon">🎟️</span> Booking</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="queries.html" class="nav-link">SQL Queries</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link" style="color: var(--light)">Contact</a></li>
+        <li class="nav-item" style="margin-left: 10px;">
+          <div class="theme-toggle-wrapper">
+            <div class="theme-toggle"><div class="theme-toggle-knob">☀️</div></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header" style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);">
+    <div class="container fade-in-up">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a> / <span style="color: white">Contact</span>
+      </div>
+      <h1>Get in Touch</h1>
+      <p>Have questions about the case study or database schema? Reach out to us.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section">
+    <div class="container">
+      
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="glass-card reveal reveal-left">
+          <h2 class="card-title mb-3">Send us a Message</h2>
+          <form id="contact-form" onsubmit="event.preventDefault(); handleContactSubmit()">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-input" required placeholder="John">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-input" required placeholder="Doe">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" required placeholder="john@example.com">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <select class="form-select" required>
+                <option value="">Select a topic...</option>
+                <option value="General">General Inquiry</option>
+                <option value="Technical">Technical Support</option>
+                <option value="Feedback">Feedback</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="form-input" rows="5" required placeholder="How can we help you?"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-full ripple mt-2">Send Message</button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="reveal reveal-right">
+          <h2 class="section-title" style="margin-bottom: 2rem">Contact Information</h2>
+          
+          <div style="display: flex; flex-direction: column; gap: 1.5rem">
+            <div class="contact-info-card">
+              <div class="contact-icon">📍</div>
+              <div>
+                <h4 style="font-weight: 700; margin-bottom: 4px;">Headquarters</h4>
+                <p style="color: var(--text-secondary); font-size: var(--fs-sm)">123 Database Avenue, Tech District<br>San Francisco, CA 94105</p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-icon">📧</div>
+              <div>
+                <h4 style="font-weight: 700; margin-bottom: 4px;">Email Support</h4>
+                <p style="color: var(--text-secondary); font-size: var(--fs-sm)">support@my-air.com<br>info@my-air.com</p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-icon">📞</div>
+              <div>
+                <h4 style="font-weight: 700; margin-bottom: 4px;">Phone</h4>
+                <p style="color: var(--text-secondary); font-size: var(--fs-sm)">+1 (555) 123-4567<br>Mon-Fri, 9am-6pm PST</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map Placeholder -->
+          <div class="map-placeholder hover-scale mt-4">
+            🗺️
+            <div style="font-size: 1rem; color: var(--text-secondary); position: absolute; margin-top: 50px">Google Maps Integration</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer mt-4">
+    <div class="container">
+      <div class="footer-bottom" style="border:none">
+        <div>&copy; 2026 My-Air Case Study.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/animation.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    function handleContactSubmit() {
+      if(App.validateForm('contact-form')) {
+        const btn = document.querySelector('#contact-form button');
+        const originalText = btn.textContent;
+        
+        btn.innerHTML = 'Sending...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+          App.showToast('Message sent successfully! We will get back to you shortly.', 'success');
+          document.getElementById('contact-form').reset();
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+</html>

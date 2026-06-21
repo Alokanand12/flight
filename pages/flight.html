@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Module | My-Air</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animation.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+<body>
+
+  <div class="cursor-glow"></div>
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">✈️</span>
+        <span>My-Air</span>
+      </a>
+
+      <div class="nav-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Modules <span class="arrow">▼</span></a>
+          <div class="nav-dropdown">
+            <a href="passenger.html" class="dropdown-link"><span class="dd-icon">👤</span> Passenger</a>
+            <a href="agency.html" class="dropdown-link"><span class="dd-icon">🏢</span> Agency</a>
+            <a href="flight.html" class="dropdown-link" style="color: var(--accent-light)"><span class="dd-icon">✈️</span> Flight</a>
+            <a href="booking.html" class="dropdown-link"><span class="dd-icon">🎟️</span> Booking</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="queries.html" class="nav-link">SQL Queries</a></li>
+        
+        <li class="nav-item" style="margin-left: 10px;">
+          <div class="theme-toggle-wrapper">
+            <div class="theme-toggle"><div class="theme-toggle-knob">☀️</div></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header" style="background: linear-gradient(135deg, #020617 0%, #1E1B4B 100%);">
+    <div class="container fade-in-up">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a> / <span>Modules</span> / <span style="color: white">Flight</span>
+      </div>
+      <h1>Flight Scheduling</h1>
+      <p>Manage flight routes, departure timings, and availability.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section">
+    <div class="container">
+      
+      <!-- Actions Row -->
+      <div class="flex justify-between items-center mb-3 reveal" style="flex-wrap: wrap; gap: 1rem;">
+        <div class="table-search">
+          <span style="color: var(--text-tertiary)">🔍</span>
+          <input type="text" id="search-input" placeholder="Search by flight ID, source, or destination...">
+        </div>
+        <button class="btn btn-primary ripple hover-lift" onclick="openModal('add-modal')">
+          + Schedule New Flight
+        </button>
+      </div>
+
+      <!-- Data Table -->
+      <div class="table-container reveal reveal-delay-1">
+        <div class="table-header">
+          <h3 class="card-title" style="margin: 0">Active Flights</h3>
+          <div class="tag tag-primary">Total: <span id="total-count">0</span></div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Flight ID <span class="sort-icon">▼</span></th>
+                <th>Route</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Rows populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay" id="add-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Schedule Flight</h3>
+        <button class="modal-close" onclick="closeModal('add-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="flight-form" onsubmit="handleFormSubmit(event)">
+          <input type="hidden" id="form-mode" value="add">
+          
+          <div class="form-group">
+            <label class="form-label">Flight ID</label>
+            <input type="text" id="f-id" class="form-input" required placeholder="e.g., FL606">
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Source City</label>
+              <input type="text" id="f-source" class="form-input" required placeholder="Origin">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Destination City</label>
+              <input type="text" id="f-dest" class="form-input" required placeholder="Destination">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input type="date" id="f-date" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Departure Time</label>
+              <input type="time" id="f-time" class="form-input" required>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary flex-1" onclick="closeModal('add-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary flex-1 ripple">Save Flight</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/database.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/animation.js"></script>
+  <script src="../js/app.js"></script>
+  
+  <script>
+    function renderTable(searchTerm = '') {
+      const data = DB.getTable('flights');
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+      
+      let filtered = data;
+      if (searchTerm) {
+        const lower = searchTerm.toLowerCase();
+        filtered = data.filter(r => 
+          r.id.toLowerCase().includes(lower) || 
+          r.source.toLowerCase().includes(lower) ||
+          r.destination.toLowerCase().includes(lower)
+        );
+      }
+
+      document.getElementById('total-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center" style="padding: 3rem">
+          <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5">✈️</div>
+          No flights found.
+        </td></tr>`;
+        return;
+      }
+
+      filtered.forEach(row => {
+        // Convert 24h to 12h if needed
+        let timeStr = row.time;
+        if (!timeStr.includes('AM') && !timeStr.includes('PM')) {
+           const [h, m] = timeStr.split(':');
+           const ampm = h >= 12 ? 'PM' : 'AM';
+           const h12 = h % 12 || 12;
+           timeStr = `${h12}:${m} ${ampm}`;
+        }
+
+        const tr = document.createElement('tr');
+        tr.className = 'fade-in-up';
+        tr.innerHTML = `
+          <td><strong style="color: var(--primary)">${row.id}</strong></td>
+          <td>${row.source} <span style="color: var(--text-tertiary)">→</span> ${row.destination}</td>
+          <td><span class="tag tag-info">📅 ${row.date}</span></td>
+          <td><span class="tag tag-warning">⏰ ${timeStr}</span></td>
+          <td>
+            <div class="table-actions">
+              <button class="btn-icon action-edit" onclick="editRecord('${row.id}')" title="Edit">✎</button>
+              <button class="btn-icon action-delete" onclick="deleteRecord('${row.id}')" title="Delete">🗑</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      renderTable(e.target.value);
+    });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.getElementById('flight-form').reset();
+      document.getElementById('form-mode').value = 'add';
+      document.getElementById('f-id').readOnly = false;
+      document.getElementById('modal-title').textContent = 'Schedule Flight';
+    }
+
+    function editRecord(id) {
+      const data = DB.getTable('flights').find(r => r.id === id);
+      if (data) {
+        document.getElementById('f-id').value = data.id;
+        document.getElementById('f-id').readOnly = true;
+        document.getElementById('f-source').value = data.source;
+        document.getElementById('f-dest').value = data.destination;
+        document.getElementById('f-date').value = data.date;
+        
+        // Ensure format is compatible with input type="time"
+        let t = data.time;
+        if (t.includes('AM') || t.includes('PM')) {
+            const match = t.match(/(\d+):(\d+)\s*(AM|PM)/i);
+            if (match) {
+                let h = parseInt(match[1]);
+                const m = match[2];
+                if (match[3].toUpperCase() === 'PM' && h < 12) h += 12;
+                if (match[3].toUpperCase() === 'AM' && h === 12) h = 0;
+                t = `${h.toString().padStart(2, '0')}:${m}`;
+            }
+        }
+        document.getElementById('f-time').value = t;
+        
+        document.getElementById('form-mode').value = 'edit';
+        document.getElementById('modal-title').textContent = 'Edit Flight';
+        openModal('add-modal');
+      }
+    }
+
+    function deleteRecord(id) {
+      if (confirm(`Are you sure you want to delete flight ${id}?`)) {
+        DB.deleteRecord('flights', 'id', id);
+        App.showToast('Flight deleted successfully', 'success');
+        renderTable();
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      if (!App.validateForm('flight-form')) return;
+
+      const record = {
+        id: document.getElementById('f-id').value,
+        source: document.getElementById('f-source').value,
+        destination: document.getElementById('f-dest').value,
+        date: document.getElementById('f-date').value,
+        time: document.getElementById('f-time').value
+      };
+
+      const mode = document.getElementById('form-mode').value;
+      
+      if (mode === 'add') {
+        const exists = DB.getTable('flights').find(r => r.id === record.id);
+        if (exists) {
+          App.showToast('Flight ID already exists!', 'error');
+          return;
+        }
+        DB.addRecord('flights', record);
+        App.showToast('Flight scheduled successfully', 'success');
+      } else {
+        DB.updateRecord('flights', 'id', record.id, record);
+        App.showToast('Flight updated successfully', 'success');
+      }
+
+      closeModal('add-modal');
+      renderTable();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => renderTable());
+  </script>
+</body>
+</html>

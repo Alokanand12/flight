@@ -1,0 +1,592 @@
+/* Air India A350 Experience Styles */
+
+:root {
+  --ai-red: #E31837;
+  --ai-dark-red: #A50B20;
+  --ai-blue: #0A1128;
+  --ai-gold: #B68A35;
+  --ai-bg-light: #F8F9FA;
+  --ai-text: #333333;
+}
+
+/* Base resets for new sections */
+.ai-section {
+  padding: 5rem 0;
+  background: #FFFFFF;
+  color: var(--ai-text);
+  font-family: 'Inter', sans-serif;
+}
+
+.ai-section.bg-light {
+  background: var(--ai-bg-light);
+}
+
+.ai-section.bg-dark {
+  background: var(--ai-blue);
+  color: #FFFFFF;
+}
+
+/* Hero Section override */
+.ai-hero-wrapper {
+  background-image: url('https://images.unsplash.com/photo-1540339832862-4745ea6198f3?q=80&w=2070&auto=format&fit=crop'); /* Airplane image */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px; /* offset navbar */
+}
+
+.ai-hero-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(10, 17, 40, 0.8) 0%, rgba(10, 17, 40, 0.2) 100%);
+}
+
+.ai-hero-inner {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+}
+
+.ai-hero-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+/* Beautiful animated gradient for 'Discover the world' text */
+.ai-hero-title .highlight-text {
+  background: linear-gradient(270deg, #FFFFFF, var(--ai-gold), var(--ai-red), #FFFFFF);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 6s ease infinite, pulse-glow 2s infinite alternate;
+  display: inline-block;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-glow {
+  0% {
+    text-shadow: 0 0 4px rgba(255,255,255,0.1);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(182, 138, 53, 0.4);
+  }
+}
+
+.ai-hero-title span {
+  color: var(--ai-red);
+}
+
+.ai-hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  color: #E2E8F0;
+}
+
+.ai-btn {
+  display: inline-block;
+  background: var(--ai-red);
+  color: #FFFFFF;
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.ai-btn:hover {
+  background: var(--ai-dark-red);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(227, 24, 55, 0.3);
+  color: #FFFFFF;
+}
+
+/* Flight Search Widget */
+.ai-search-widget {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  margin-top: 20px; /* Moved down slightly as requested */
+  position: relative;
+  z-index: 10;
+}
+
+.ai-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.ai-search-field {
+  flex: 1;
+  min-width: 150px;
+}
+
+.ai-search-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748B;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.ai-search-field input, .ai-search-field select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: var(--ai-text);
+  background: #F8F9FA;
+  transition: all 0.2s;
+}
+
+.ai-search-field input:focus, .ai-search-field select:focus {
+  border-color: var(--ai-red);
+  outline: none;
+  background: #FFFFFF;
+}
+
+/* Problem Statements Grid */
+.ps-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ps-header h2 {
+  font-size: 2.5rem;
+  color: var(--ai-blue);
+  margin-bottom: 0.5rem;
+}
+
+.ps-header h2 span {
+  color: var(--ai-red);
+}
+
+.ps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.ps-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ps-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  border-color: #CBD5E1;
+}
+
+.ps-badge {
+  background: #545FE5;
+  color: #FFFFFF;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.ps-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ai-blue);
+  margin-bottom: 1rem;
+}
+
+.ps-desc {
+  font-size: 0.9rem;
+  color: #64748B;
+  line-height: 1.6;
+}
+
+/* A350 Experience Sections */
+.exp-row {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.exp-row:last-child {
+  margin-bottom: 0;
+}
+
+.exp-row.reverse {
+  flex-direction: row-reverse;
+}
+
+@media(max-width: 768px) {
+  .exp-row, .exp-row.reverse {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.exp-content {
+  flex: 1;
+}
+
+.exp-image {
+  flex: 1;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.exp-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.exp-image:hover img {
+  transform: scale(1.03);
+}
+
+.exp-content h3 {
+  font-size: 2rem;
+  color: var(--ai-blue);
+  margin-bottom: 1.5rem;
+}
+
+.exp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exp-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 1rem;
+  color: #475569;
+  font-size: 1.05rem;
+}
+
+.exp-list li::before {
+  content: '•';
+  color: var(--ai-gold);
+  font-size: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: -4px;
+}
+
+/* Seat Map Section */
+.seat-map-container {
+  background: var(--ai-bg-light);
+  padding: 4rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.problem-card {
+  background: rgb(34, 36, 51);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.problem-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.14);
+  border-color: rgba(79, 70, 229, 0.18);
+}
+
+.problem-card-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.35fr) minmax(260px, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.problem-card-image-wrapper {
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.problem-card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.problem-card:hover .problem-card-image {
+  transform: scale(1.03);
+  filter: brightness(1.04);
+}
+
+.problem-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.problem-card-box {
+   background: #76c6d0;
+   border: 1px solid rgba(148, 163, 184, 0.16);
+   border-radius: 24px;
+   padding: 1.8rem;
+   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+ }
+ 
+ .problem-card-box:hover {
+   transform: translateY(-8px);
+   box-shadow: 0 28px 60px rgba(15, 23, 42, 0.12);
+   border-color: rgba(79, 70, 229, 0.18);
+   background: #6e9592;
+ }
+
+.problem-card-pill {
+  display: inline-flex;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: #5B5EEA;
+  color: #434a4a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.problem-card-box-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: rgba(194, 193, 202, 0.08);
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  display: none;
+}
+
+.problem-card-box h4 {
+  margin: 0 0 0.85rem;
+  font-size: 1.15rem;
+  color: black;
+}
+
+.problem-card-box p {
+  color: #475569;
+  line-height: 1.75;
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.problem-card-content h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--ai-blue);
+}
+
+.problem-card-content p {
+  color: #475569;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+  .problem-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .problem-card {
+    padding: 1rem;
+  }
+  .problem-card-content h3 {
+    font-size: 1.6rem;
+  }
+}
+
+.seat-map-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+/* Seat map legend image - cropped/fitted responsive styles */
+.seat-map-legend-image {
+  width: 100%;
+  max-width: 1100px;
+  height: 360px;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  margin: 1.25rem auto 0;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 900px) {
+  .seat-map-legend-image {
+    height: 240px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seat-map-legend-image {
+    height: 180px;
+  }
+}
+
+/* Seat map preview image (above section title) */
+.seat-map-preview-img {
+  width: 100%;
+  max-width: 1000px;
+  height: 360px;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 900px) {
+  .seat-map-preview-img {
+    height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seat-map-preview-img {
+    height: 180px;
+  }
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* Destinations Section */
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.dest-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+}
+
+.dest-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.dest-card:hover img {
+  transform: scale(1.1);
+}
+
+.dest-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.15) 70%, transparent);
+  padding: 1.25rem 0.9rem 1rem;
+  color: #FFFFFF;
+  pointer-events: none;
+}
+
+.dest-info h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  color: #ffffff;
+  transition: color 240ms ease, text-shadow 240ms ease;
+}
+
+/* Hover: change destination title to gold */
+.dest-card:hover .dest-info h4 {
+  color: #D4AF37; /* gold */
+  text-shadow: 0 2px 10px rgba(212,175,55,0.35);
+}
+
+.dest-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 0.5rem;
+}
+
+.dest-tab {
+  font-size: 1rem;
+  color: #64748B;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.dest-tab.active {
+  color: var(--ai-blue);
+  border-bottom: 2px solid var(--ai-red);
+}

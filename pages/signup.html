@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | My-Air</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animation.css">
+</head>
+<body>
+
+  <nav class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><span>MY-AIR</span></a>
+    </div>
+  </nav>
+
+  <main class="section" style="padding-top: 120px;">
+    <div class="container">
+      <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
+        <h2 class="section-title">Create an account</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem">Sign up to manage bookings and demos.</p>
+        <form onsubmit="event.preventDefault(); alert('Account created (demo)')">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <input type="text" placeholder="First name" required style="padding:12px; border:1px solid var(--border-color); border-radius:8px;">
+            <input type="text" placeholder="Last name" required style="padding:12px; border:1px solid var(--border-color); border-radius:8px;">
+            <input type="email" placeholder="email@example.com" required style="padding:12px; border:1px solid var(--border-color); border-radius:8px; grid-column: 1 / -1;">
+            <input type="password" placeholder="Password" required style="padding:12px; border:1px solid var(--border-color); border-radius:8px; grid-column: 1 / -1;">
+          </div>
+          <div style="margin-top: 12px;">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

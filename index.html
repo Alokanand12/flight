@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Booking Agency | Case Study</title>
+  <meta name="description"
+    content="A premium DBMS case study web application for Flight Booking through Agency Management System.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animation.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <link rel="stylesheet" href="css/csit.css">
+  <link rel="stylesheet" href="css/airindia.css">
+
+  <!-- Favicon placeholder -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen">
+    <div class="loader-airplane">✈️</div>
+    <div class="loader-text typewriter">Initializing System...</div>
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow"></div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar csit-navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-icon">✈️</span>
+        <span>My-Air</span>
+      </a>
+
+          <!-- Hamburger -->
+          <div class="nav-hamburger" style="filter: invert(1);">
+            <span></span><span></span><span></span>
+          </div>
+
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="#" class="nav-link">DBMS <span class="arrow">▼</span></a>
+              <div class="nav-dropdown">
+                <a href="#case-study" class="dropdown-link">Case Study</a>
+                <a href="#problem" class="dropdown-link">Problem Statement</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">CREATE <span class="arrow">▼</span></a>
+              <div class="nav-dropdown">
+                <a href="pages/passenger.html" class="dropdown-link">Create Passenger</a>
+                <a href="pages/agency.html" class="dropdown-link">Create Agency</a>
+                <a href="pages/flight.html" class="dropdown-link">Create Flight</a>
+                <a href="pages/booking.html" class="dropdown-link">Create Booking</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">ALTER <span class="arrow">▼</span></a>
+              <div class="nav-dropdown">
+                <a href="pages/passenger.html" class="dropdown-link">Alter Passenger</a>
+                <a href="pages/agency.html" class="dropdown-link">Alter Agency</a>
+                <a href="pages/flight.html" class="dropdown-link">Alter Flight</a>
+                <a href="pages/booking.html" class="dropdown-link">Alter Booking</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">INSERT <span class="arrow">▼</span></a>
+              <div class="nav-dropdown">
+                <a href="pages/passenger.html" class="dropdown-link">Insert Into Passenger</a>
+                <a href="pages/agency.html" class="dropdown-link">Insert Into Agency</a>
+                <a href="pages/flight.html" class="dropdown-link">Insert Into Flight</a>
+                <a href="pages/booking.html" class="dropdown-link">Insert Into Booking</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">DELETE <span class="arrow">▼</span></a>
+              <div class="nav-dropdown">
+                <a href="pages/passenger.html" class="dropdown-link">Delete From Passenger</a>
+                <a href="pages/agency.html" class="dropdown-link">Delete From Agency</a>
+                <a href="pages/flight.html" class="dropdown-link">Delete From Flight</a>
+                <a href="pages/booking.html" class="dropdown-link">Delete From Booking</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">UPDATE <span class="arrow">▼</span></a>
+              <div class="nav-dropdown">
+                <a href="pages/passenger.html" class="dropdown-link">Update Passenger</a>
+                <a href="pages/agency.html" class="dropdown-link">Update Agency</a>
+                <a href="pages/flight.html" class="dropdown-link">Update Flight</a>
+                <a href="pages/booking.html" class="dropdown-link">Update Booking</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">SELECT <span class="arrow">▼</span></a>
+              <div class="nav-dropdown">
+                <a href="pages/passenger.html" class="dropdown-link">Select From Passenger</a>
+                <a href="pages/agency.html" class="dropdown-link">Select From Agency</a>
+                <a href="pages/flight.html" class="dropdown-link">Select From Flight</a>
+                <a href="pages/booking.html" class="dropdown-link">Select From Booking</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">BLOG <span class="arrow">▼</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/contact.html" class="nav-link">CONTACT</a>
+            </li>
+          </ul>
+
+          <div class="nav-auth">
+            <a href="pages/signin.html" class="auth-link">Sign In</a>
+            <a href="pages/signup.html" class="btn btn-primary btn-sm" style="color: white">Sign Up</a>
+          </div>
+    </div>
+  </nav>
+
+
+  <!-- Air India A350 Hero Section -->
+  <section id="home" class="ai-hero-wrapper" style="background: linear-gradient(135deg, #0A1128 0%, #1e3a8a 100%);">
+    <div class="container ai-hero-inner fade-in-up"
+      style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+      <div style="flex: 1; min-width: 300px;">
+        <h1 class="ai-hero-title">
+          <span class="highlight-text">Discover the world-class</span> <br>
+          <span style="color: var(--ai-gold); font-size: 0.8em;">With our flights</span>
+        </h1>
+        <p id="case-study" class="ai-hero-subtitle" style="margin-bottom: 2rem; color: #E2E8F0;">
+          <strong>CSIT Department — DBMS Case Study</strong><br>
+          Based On Flight Booking System<br><br>
+          <span style="font-size: 0.9em; opacity: 0.9;">Search Flights, Manage Passenger, Agency & Booking</span>
+        </p>
+        <a href="#seat-map-section" class="ai-btn">Take A Virtual Tour</a>
+      </div>
+
+      <div style="flex: 1; min-width: 300px; text-align: right;">
+        <!-- Aeroplane Photo Added explicitly in the section below navbar -->
+        <img src="https://media.istockphoto.com/id/1714990127/photo/big-airplane-leaves-the-ground-in-the-sky-at-sunset.webp?a=1&b=1&s=612x612&w=0&k=20&c=0Y72SIqWbdyuIpw2l36yD3AfamZCb1u0H2mFgq34qwQ="
+          alt="Aeroplane"
+          style="width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); transform: rotate(-5deg); transition: transform 0.5s ease;"
+          onmouseover="this.style.transform='rotate(0deg) scale(1.05)';"
+          onmouseout="this.style.transform='rotate(-5deg) scale(1)';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Flight Search Widget -->
+  <section style="position: relative; z-index: 10;">
+    <div class="container">
+      <div class="ai-search-widget reveal">
+        <form id="flight-search" class="ai-search-form"
+          onsubmit="event.preventDefault(); App.showToast('Searching flights...', 'info')">
+          <div class="ai-search-field">
+            <label>Origin</label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <input list="city-options" id="origin-input" placeholder="From" required style="width: 100%;">
+              <button type="button" onclick="document.getElementById('origin-input').value = 'Bhopal';"
+                style="position: absolute; right: 10px; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--ai-red);"
+                title="Set common location">📍</button>
+            </div>
+          </div>
+          <div class="ai-search-field">
+            <label>Destination</label>
+            <input list="city-options" id="destination-input" placeholder="To" required style="width: 100%;">
+          </div>
+          <datalist id="city-options">
+            <option value="Bhopal"></option>
+            <option value="Mumbai"></option>
+            <option value="Delhi"></option>
+            <option value="Chennai"></option>
+            <option value="Indore"></option>
+            <option value="Kolkata"></option>
+            <option value="Hyderabad"></option>
+          </datalist>
+          <div class="ai-search-field">
+            <label>Depart Date</label>
+            <input type="date" required>
+          </div>
+          <div class="ai-search-field">
+            <label>Return Date</label>
+            <input type="date">
+          </div>
+          <div class="ai-search-field">
+            <label>Passenger(s) & Class</label>
+            <select required>
+              <option value="">1 Adult, Economy</option>
+              <option value="PE">1 Adult, Premium Economy</option>
+              <option value="BC">1 Adult, Business</option>
+            </select>
+          </div>
+          <div class="ai-search-field" style="flex: 0 0 auto;">
+            <button type="submit" class="ai-btn">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Statement -->
+  <section id="problem" class="ai-section bg-light">
+    <div class="container">
+      <div class="ps-header reveal">
+        <h2>Problem Statement</h2>
+        <p style="color: #64748B;">Complete set of requirements for the Flight Booking System case study.</p>
+      </div>
+
+      <div class="reveal reveal-scale problem-card hover-scale" style="margin: 2rem 0;">
+        <div class="problem-card-grid">
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">01 PS</div>
+            <h4>Problem Statement-01</h4>
+            <p>Get the complete details of all flights to New Delhi.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">02 PS</div>
+            <h4>Problem Statement-02</h4>
+            <p>Get the details about all flights from Chennai to New Delhi.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">03 PS</div>
+            <h4>Problem Statement-03</h4>
+            <p>Find only the flight numbers for passenger with pid 123 for flights to Chennai before 06/11/2020.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">04 PS</div>
+            <h4>Problem Statement-04</h4>
+            <p>Find the passenger names for passengers who have bookings on at least one flight.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">05 PS</div>
+            <h4>Problem Statement-05</h4>
+            <p>Find the passenger names for those who do not have any bookings in any flights.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">06 PS</div>
+            <h4>Problem Statement-06</h4>
+            <p>Find the agency names for agencies that located in the same city as passenger with passenger id 123.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">07 PS</div>
+            <h4>Problem Statement-07</h4>
+            <p>Get the details of flights that are scheduled on both dates 01/12/2020 and 02/12/2020 at 16:00 hours.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">08 PS</div>
+            <h4>Problem Statement-08</h4>
+            <p>Get the details of flights that are scheduled on either of the dates 01/12/2020 or 02/12/2020 or both at 16:00 hours.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">09 PS</div>
+            <h4>Problem Statement-09</h4>
+            <p>Find the agency names for agencies who do not have any bookings for passenger with id 123.</p>
+          </div>
+
+          <div class="problem-card-box hover-scale">
+            <div class="problem-card-pill">10 PS</div>
+            <h4>Problem Statement-10</h4>
+            <p>Find the details of all male passengers who are associated with Jet agency.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Class Experience -->
+  <section class="ai-section">
+    <div class="container">
+      <div class="exp-row reveal">
+        <div class="exp-content">
+          <h3>Unparalleled Business class experience</h3>
+          <ul class="exp-list">
+            <li>Dedicated check-in counter</li>
+            <li>Priority boarding</li>
+            <li>Extra baggage allowance</li>
+            <li>Private suite with 79" full flatbed and privacy doors</li>
+            <li>Personal wardrobe and ample stowage</li>
+            <li>Gourmet meals and handpicked beverages</li>
+            <li>21" HD personal entertainment screen</li>
+            <li>Universal AC and USB power outlets</li>
+          </ul>
+        </div>
+        <div class="exp-image hover-scale">
+          <img src="https://images.unsplash.com/photo-1739611216827-feb53c7b49dd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJ1c3NpbmVzcyUyMGNsYXNzJTIwaW1hZ2UlMjBmbGlnaHQlMjBmcmVlfGVufDB8MHwwfHx8MA%3D%3D"
+            alt="Business Class">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Economy Experience -->
+  <section class="ai-section bg-light">
+    <div class="container">
+      <div class="exp-row reverse reveal">
+        <div class="exp-content">
+          <h3>Level Up with Premium Economy</h3>
+          <ul class="exp-list">
+            <li>Dedicated check-in counter</li>
+            <li>Priority boarding</li>
+            <li>38" seat pitch, 18.5" seat width and 8" recline</li>
+            <li>4-way adjustable headrest, leg rest with foot paddle</li>
+            <li>Personal reading light</li>
+            <li>Full-course hot meals with global flavours</li>
+            <li>13.3" HD touchscreen</li>
+            <li>Award-winning amenity kits</li>
+          </ul>
+        </div>
+        <div class="exp-image hover-scale">
+          <img src="https://images.unsplash.com/photo-1778432195266-4491fc66d1ca?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fHByZW1pdW0lMjBlY29ub215JTIwY2xhc3MlMjBpbWFnZSUyMGZsaWdodCUyMGZyZWV8ZW58MHwwfDB8fHww"
+            alt="Premium Economy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Economy Experience -->
+  <section class="ai-section">
+    <div class="container">
+      <div class="exp-row reveal">
+        <div class="exp-content">
+          <h3>Elevated comfort with Economy</h3>
+          <ul class="exp-list">
+            <li>31" seat pitch, 17.5" seat width and 6" recline</li>
+            <li>Adjustable headrest</li>
+            <li>12" HD touchscreen and earbuds</li>
+            <li>Full-course hot meals</li>
+            <li>Blanket and pillow</li>
+            <li>USB power outlets</li>
+          </ul>
+        </div>
+        <div class="exp-image hover-scale">
+          <img src="https://images.unsplash.com/photo-1624735490219-a400e17449dc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGVjb25vbXklMjBjbGFzcyUyMGltYWdlJTIwZmxpZ2h0JTIwZnJlZXxlbnwwfDB8MHx8fDA%3D"
+            alt="Economy Class">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seat Map -->
+  <section id="seat-map-section" class="ai-section bg-light">
+    <div class="container">
+      <div class="seat-map-preview reveal" style="text-align: center; margin-bottom: 2rem;">
+        <img src="https://media.istockphoto.com/id/530089923/photo/landing-airplane.webp?a=1&b=1&s=612x612&w=0&k=20&c=1QH3-XCD51wElKVDMQ3b8jAs3jiEkxHiyZlE70KnhoQ="
+          alt="Cutting-edge A350 features"
+          class="seat-map-preview-img">
+      </div>
+
+      <div class="ps-header reveal">
+        <h2 style="font-size: 2rem;">Cutting-edge features of the My-AIR</h2>
+        <p style="max-width: 800px; margin: 0 auto; color: #64748B;">Introducing India's first Airbus my-AIR, where
+          technology meets unparalleled comfort. As the latest addition to the skies, the My-AIR redefines air travel with
+          its contemporary design, fuel efficiency, and innovative features.</p>
+      </div>
+
+      <div class="seat-map-legend reveal">
+        <div class="legend-item">
+          <div class="legend-color" style="background: #0A1128"></div> Business Class
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #A50B20"></div> Premium Economy
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #E31837"></div> Economy Class
+        </div>
+        <div class="legend-item">🍴 Galley</div>
+        <div class="legend-item">🚻 Lavatory</div>
+        <div class="legend-item">♿ Wheelchair</div>
+      </div>
+      <img src="https://images.pexels.com/photos/23848586/pexels-photo-23848586.jpeg" alt="Seat map illustration" class="seat-map-legend-image">
+    </div>
+  </section>
+
+  <!-- Destinations -->
+  <section class="ai-section">
+    <div class="container">
+      <h3 style="font-size: 1.5rem; color: #64748B; text-transform: uppercase; margin-bottom: 2rem;" class="reveal">See
+        where you can fly on the MY-AIR</h3>
+
+      <div class="dest-tabs reveal">
+      
+        <div class="dest-tab active">Domestic</div>
+      </div>
+
+      <div class="dest-grid">
+        <div class="dest-card reveal reveal-delay-1">
+          <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=2070&auto=format&fit=crop"
+            alt="Delhi">
+          <div class="dest-info">
+            <h4>BOM-DEL</h4>
+          </div>
+        </div>
+        <div class="dest-card reveal reveal-delay-2">
+          <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=2070&auto=format&fit=crop"
+            alt="Bangalore">
+          <div class="dest-info">
+            <h4>DEL-BLR</h4>
+          </div>
+        </div>
+        <div class="dest-card reveal reveal-delay-3">
+          <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=2070&auto=format&fit=crop"
+            alt="Chennai">
+          <div class="dest-info">
+            <h4>BLR-MAA</h4>
+          </div>
+        </div>
+        <div class="dest-card reveal reveal-delay-4">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop"
+            alt="Hyderabad">
+          <div class="dest-info">
+            <h4>DEL-HYD</h4>
+          </div>
+        </div>
+        <div class="dest-card reveal reveal-delay-1">
+          <img src="data:image/webp;base64,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"
+            alt="Mumbai">
+          <div class="dest-info">
+            <h4>BLR-BOM</h4>
+          </div>
+        </div>
+        <div class="dest-card reveal reveal-delay-2">
+          <img src="https://th.bing.com/th/id/OIP.kia39rDYbrq0EMUonIkdYwHaFq?w=223&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+            alt="Chennai">
+          <div class="dest-info">
+            <h4>BOM-MAA</h4>
+          </div>
+        </div>
+        <div class="dest-card reveal reveal-delay-3">
+          <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=2070&auto=format&fit=crop"
+            alt="Bangalore">
+          <div class="dest-info">
+            <h4>MAA-BLR</h4>
+          </div>
+        </div>
+        <div class="dest-card reveal reveal-delay-4">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop"
+            alt="Mumbai">
+          <div class="dest-info">
+            <h4>BOM-BLR</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="nav-logo-icon">✈️</span>
+            <span>My-Air</span>
+          </a>
+          <p>Setting the standard in database management system simulations for the aviation and travel industry.
+            Premium UI with robust backend logic.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">𝕏</a>
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">gh</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Modules</h4>
+          <a href="pages/passenger.html">Passenger</a>
+          <a href="pages/agency.html">Agency</a>
+          <a href="pages/flight.html">Flight</a>
+          <a href="pages/booking.html">Booking</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <a href="#case-study">Case Study</a>
+          <a href="pages/queries.html">SQL Queries</a>
+          <a href="#">ER Diagram</a>
+          <a href="#">Schema Design</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Newsletter</h4>
+          <a href="#">Subscribe for updates</a>
+          <form class="footer-newsletter mt-1"
+            onsubmit="event.preventDefault(); App.showToast('Subscribed successfully!')">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit" class="btn btn-primary btn-icon">→</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 My-Air Case Study. All rights reserved.</div>
+        <div>Designed with HTML5, CSS3, and Vanilla JS</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/database.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+/* ============================================================
+   DARK MODE THEME OVERRIDES
+   ============================================================ */
+
+[data-theme="dark"] {
+  --bg-primary:     #0B0F1A;
+  --bg-secondary:   #111827;
+  --bg-tertiary:    #1E293B;
+  --text-primary:   #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-tertiary:  #64748B;
+  --border-color:   rgba(255,255,255,0.08);
+  --card-bg:        rgba(17, 24, 39, 0.8);
+  --input-bg:       rgba(30, 41, 59, 0.6);
+
+  --glass-bg:       rgba(17, 24, 39, 0.6);
+  --glass-border:   rgba(255,255,255,0.06);
+  --glass-shadow:   0 8px 32px rgba(0,0,0,0.4);
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 6px rgba(0,0,0,0.3);
+  --shadow-lg:  0 10px 15px rgba(0,0,0,0.4);
+  --shadow-xl:  0 20px 25px rgba(0,0,0,0.5);
+}
+
+/* Dark mode specific overrides */
+[data-theme="dark"] .navbar.scrolled {
+  background: rgba(11, 15, 26, 0.9);
+  border-bottom-color: rgba(255,255,255,0.04);
+}
+
+[data-theme="dark"] .glass-card {
+  background: rgba(17, 24, 39, 0.7);
+  border-color: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .glass-card:hover {
+  border-color: rgba(79,70,229,0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(79,70,229,0.1);
+}
+
+[data-theme="dark"] .stat-card {
+  background: rgba(17, 24, 39, 0.7);
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .table-container {
+  background: rgba(17, 24, 39, 0.7);
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .data-table thead {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="dark"] .data-table td {
+  border-bottom-color: rgba(255,255,255,0.04);
+}
+
+[data-theme="dark"] .data-table tbody tr:hover {
+  background: rgba(79,70,229,0.08);
+}
+
+[data-theme="dark"] .query-card {
+  background: rgba(17, 24, 39, 0.7);
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .query-card-header {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-select {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--light);
+}
+
+[data-theme="dark"] .form-input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+[data-theme="dark"] .modal {
+  background: #111827;
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .contact-info-card {
+  background: rgba(17, 24, 39, 0.7);
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .map-placeholder {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .filter-tab {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255,255,255,0.06);
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .table-search {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .table-search input {
+  color: var(--light);
+}
+
+[data-theme="dark"] .pagination-btn {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .toast {
+  background: #111827;
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .live-clock {
+  background: #111827;
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .scroll-top {
+  box-shadow: 0 4px 20px rgba(79,70,229,0.3);
+}
+
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(90deg,
+    rgba(30,41,59,0.8) 25%,
+    rgba(51,65,85,0.8) 50%,
+    rgba(30,41,59,0.8) 75%
+  );
+  background-size: 200% 100%;
+}
+
+[data-theme="dark"] .section-badge {
+  background: rgba(79,70,229,0.15);
+  border-color: rgba(79,70,229,0.3);
+}
+
+[data-theme="dark"] .card-icon {
+  background: rgba(79,70,229,0.15);
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: rgba(79,70,229,0.3);
+  border-color: rgba(79,70,229,0.4);
+}
+
+[data-theme="dark"] .page-header {
+  background: linear-gradient(135deg, #0B0F1A 0%, #1E293B 40%, #312E81 100%);
+}
+
+[data-theme="dark"] .page-header::after {
+  background: var(--bg-primary);
+}
+
+/* Dark mode transition for smooth theme switch */
+[data-theme="dark"] *,
+[data-theme="dark"] *::before,
+[data-theme="dark"] *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark cursor glow */
+[data-theme="dark"] .cursor-glow {
+  background: radial-gradient(circle, rgba(79,70,229,0.12) 0%, transparent 70%);
+}
+
+/* Form select dropdown in dark mode */
+[data-theme="dark"] .form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394A3B8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .form-select option {
+  background: #111827;
+  color: var(--light);
+}
+
+[data-theme="dark"] .search-field select option {
+  background: #111827;
+}
