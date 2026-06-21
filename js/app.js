@@ -117,12 +117,74 @@ const App = (() => {
     return isValid;
   }
 
+  function renderSearchResults(results, searchInfo) {
+    const container = document.getElementById('flight-search-results');
+    if (!container) return;
+
+    if (!results || results.length === 0) {
+      container.innerHTML = `
+        <div class="search-results-empty">
+          No flights found for ${searchInfo.origin} → ${searchInfo.destination} on ${searchInfo.departDate}.
+        </div>
+      `;
+      container.classList.remove('hidden');
+      return;
+    }
+
+    const cards = results.map(flight => `
+      <div class="result-card">
+        <div class="result-card-top">
+          <div>${flight.id}</div>
+          <div>${flight.time}</div>
+        </div>
+        <div class="result-route">${flight.source} → ${flight.destination}</div>
+        <div class="result-date">Date: ${flight.date}</div>
+      </div>
+    `).join('');
+
+    container.innerHTML = `
+      <div class="search-results-header">
+        Showing ${results.length} matching flight${results.length > 1 ? 's' : ''} for ${searchInfo.origin} → ${searchInfo.destination} on ${searchInfo.departDate}
+      </div>
+      <div class="search-results-grid">
+        ${cards}
+      </div>
+    `;
+    container.classList.remove('hidden');
+  }
+
+  function searchFlights() {
+    const origin = document.getElementById('origin-input')?.value.trim();
+    const destination = document.getElementById('destination-input')?.value.trim();
+    const departDate = document.getElementById('depart-date-input')?.value;
+    const travelClass = document.getElementById('travel-class-select')?.value;
+
+    if (!origin || !destination || !departDate || !travelClass) {
+      showToast('Please complete all required search fields.', 'warning');
+      return;
+    }
+
+    const flights = DB.getTable('flights') || [];
+    const results = flights.filter(flight =>
+      flight.source.toLowerCase() === origin.toLowerCase() &&
+      flight.destination.toLowerCase() === destination.toLowerCase()
+    );
+
+    if (results.length) {
+      showToast(`${results.length} flight${results.length > 1 ? 's' : ''} found. Showing results.`, 'success');
+    } else {
+      showToast('No flights found. Try a different route.', 'error');
+    }
+
+    renderSearchResults(results, { origin, destination, departDate, travelClass });
+  }
+
   function init() {
     initMobileMenu();
     updateDashboardStats();
   }
 
-  return { init, showToast, validateForm, updateDashboardStats };
+  return { init, showToast, validateForm, updateDashboardStats, searchFlights };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

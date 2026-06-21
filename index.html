@@ -161,14 +161,14 @@
     <div class="container">
       <div class="ai-search-widget reveal">
         <form id="flight-search" class="ai-search-form"
-          onsubmit="event.preventDefault(); App.showToast('Searching flights...', 'info')">
+          onsubmit="event.preventDefault(); App.searchFlights()">
           <div class="ai-search-field">
             <label>Origin</label>
             <div style="position: relative; display: flex; align-items: center;">
               <input list="city-options" id="origin-input" placeholder="From" required style="width: 100%;">
               <button type="button" onclick="document.getElementById('origin-input').value = 'Bhopal';"
                 style="position: absolute; right: 10px; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--ai-red);"
-                title="Set common location">📍</button>
+                title="Set common location"></button>
             </div>
           </div>
           <div class="ai-search-field">
@@ -186,15 +186,15 @@
           </datalist>
           <div class="ai-search-field">
             <label>Depart Date</label>
-            <input type="date" required>
+            <input type="date" id="depart-date-input" required>
           </div>
           <div class="ai-search-field">
             <label>Return Date</label>
-            <input type="date">
+            <input type="date" id="return-date-input">
           </div>
           <div class="ai-search-field">
             <label>Passenger(s) & Class</label>
-            <select required>
+            <select id="travel-class-select" required>
               <option value="">1 Adult, Economy</option>
               <option value="PE">1 Adult, Premium Economy</option>
               <option value="BC">1 Adult, Business</option>
@@ -204,6 +204,7 @@
             <button type="submit" class="ai-btn">Search</button>
           </div>
         </form>
+        <div id="flight-search-results" class="flight-search-results hidden"></div>
       </div>
     </div>
   </section>

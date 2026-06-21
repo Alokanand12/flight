@@ -166,6 +166,61 @@
   background: #FFFFFF;
 }
 
+.flight-search-results {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #F8FAFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+}
+
+.flight-search-results.hidden {
+  display: none;
+}
+
+.search-results-header {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ai-blue);
+}
+
+.search-results-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.result-card {
+  border-radius: 12px;
+  padding: 1rem;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.result-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.result-route {
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.result-date {
+  color: #64748B;
+  font-size: 0.95rem;
+}
+
+.search-results-empty {
+  color: #475569;
+  font-weight: 600;
+}
+
 /* Problem Statements Grid */
 .ps-header {
   text-align: center;
